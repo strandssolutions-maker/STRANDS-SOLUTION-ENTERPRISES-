@@ -6,25 +6,17 @@
     <style>
         body { background-color: #fafaf9; font-family: 'Segoe UI', sans-serif; padding: 15px; text-align: center; color: #1c1917; }
         .app-container { background: white; padding: 25px; border-radius: 20px; box-shadow: 0px 10px 30px rgba(0,0,0,0.08); max-width: 500px; margin: auto; border-top: 6px solid #db2777; }
-        
         .logo-container img { max-width: 120px; height: auto; border-radius: 50%; margin-bottom: 10px; border: 3px solid #fdf2f8; }
         h1 { color: #be185d; margin-bottom: 5px; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         .tagline { color: #701a75; font-weight: bold; margin-top: 0; font-size: 12px; margin-bottom: 20px; }
-        
         .section-label { background: #fdf2f8; padding: 8px; border-radius: 5px; font-weight: bold; color: #be185d; margin-top: 20px; text-align: left; font-size: 14px; }
         label { display: block; margin-top: 15px; font-weight: 600; text-align: left; font-size: 14px; color: #444; }
         input, select { width: 100%; padding: 14px; margin-top: 6px; border: 1px solid #e7e5e4; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
-        
         .terms-link { font-size: 12px; color: #db2777; text-decoration: underline; cursor: pointer; margin-top: 15px; display: inline-block; font-weight: 600; }
-
-        /* Policy Modal */
         .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
         .modal-content { background-color: white; margin: 10% auto; padding: 25px; border-radius: 20px; width: 85%; max-width: 450px; text-align: left; position: relative; max-height: 80vh; overflow-y: auto; }
         .close-btn { color: #be185d; position: absolute; right: 15px; top: 10px; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .modal-content h3 { color: #be185d; border-bottom: 2px solid #fdf2f8; padding-bottom: 10px; }
-        .modal-content ul { padding-left: 20px; font-size: 14px; color: #444; line-height: 1.8; }
-
-        button { background-color: #25d366; color: white; border: none; width: 100%; padding: 18px; margin-top: 25px; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer; box-shadow: 0px 4px 10px rgba(37, 211, 102, 0.3); }
+        button { background-color: #25d366; color: white; border: none; width: 100%; padding: 18px; margin-top: 25px; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -42,27 +34,32 @@
     <div class="section-label">SELECT SERVICE</div>
     <select id="serviceSelected">
         <optgroup label="Closure Ventilation">
-            <option value="2x4 Ventilation|9000">2x4 Closure - ₦9,000</option>
-            <option value="4x4 Ventilation|13000">4x4 Closure - ₦13,000</option>
-            <option value="5x5 Ventilation|19000">5x5 Closure - ₦19,000</option>
-            <option value="6x6 Ventilation|24000">6x6 Closure - ₦24,000</option>
-            <option value="7x7 Ventilation|28000">7x7 Closure - ₦28,000</option>
-            <option value="13x4 Ventilation|33000">13x4 Frontal - ₦33,000</option>
-            <option value="13x5 Ventilation|38000">13x5 Frontal - ₦38,000</option>
-            <option value="13x6 Ventilation|45000">13x6 Frontal - ₦45,000</option>
+            <option value="2x4 Closure Ventilation|9000">2x4 Closure - ₦9,000</option>
+            <option value="4x4 Closure Ventilation|13000">4x4 Closure - ₦13,000</option>
+            <option value="5x5 Closure Ventilation|19000">5x5 Closure - ₦19,000</option>
+            <option value="6x6 Closure Ventilation|24000">6x6 Closure - ₦24,000</option>
+            <option value="7x7 Closure Ventilation|28000">7x7 Closure - ₦28,000</option>
+            <option value="13x4 Frontal Ventilation|33000">13x4 Frontal - ₦33,000</option>
+            <option value="13x5 Frontal Ventilation|38000">13x5 Frontal - ₦38,000</option>
+            <option value="13x6 Frontal Ventilation|45000">13x6 Frontal - ₦45,000</option>
         </optgroup>
-        <optgroup label="Other Services">
+        <optgroup label="Wigging Services">
+            <option value="Wigging|10000">Wigging - ₦10,000</option>
             <option value="Wigging & Styling|20000">Wigging & Styling - ₦20,000</option>
             <option value="Machine Wigging|20000">Machine Wigging - ₦20,000</option>
+        </optgroup>
+        <optgroup label="Repairs & Styling">
             <option value="Closure Repair|2000">Closure Repair - From ₦2,000</option>
+            <option value="Styling Service|5000">Styling Services - From ₦5,000</option>
             <option value="Wig Revamp|0">Wig Revamp - Request Quote</option>
+            <option value="Ventilation Lace Materials|0">Lace Materials - Request Quote</option>
         </optgroup>
     </select>
     
-    <label>Order Type</label>
+    <label>Order Type (Timeline)</label>
     <select id="orderType">
-        <option value="Standard|0">Standard (2 Weeks)</option>
-        <option value="Rush Order|5000">Rush Order (+₦5,000)</option>
+        <option value="Standard|0">Standard (2 Weeks) - +₦0</option>
+        <option value="Rush Order|5000">Rush Order (Fast Track) - +₦5,000</option>
     </select>
 
     <span class="terms-link" onclick="toggleModal()">📜 View Business Policy & Terms</span>
@@ -81,10 +78,8 @@
             <li><strong>70% non-refundable deposit</strong> required before production.</li>
             <li>All prices are <strong>fixed and non-negotiable</strong>.</li>
             <li>Production timeline is <strong>two (2) weeks</strong>.</li>
-            <li>Pressure work is <strong>not accepted</strong>.</li>
             <li>Rush orders attract an additional <strong>₦5,000 fee</strong>.</li>
             <li>Full balance payment required before collection.</li>
-            <li>Pick-up dates must be strictly adhered to.</li>
         </ul>
     </div>
 </div>
@@ -96,7 +91,8 @@
     }
 
     function orderViaWhatsApp() {
-        let myNumber = "+2348147040257"; // USE YOUR REAL NUMBER
+        // SET YOUR REAL NUMBER HERE
+        let myNumber = "+2348147040257"; 
         
         let name = document.getElementById("custName").value;
         let serviceData = document.getElementById("serviceSelected").value.split('|');
@@ -115,16 +111,19 @@
         let total = basePrice + rushFee;
         let deposit = total * 0.7;
 
+        let priceText = (total === 0) ? "Quote requested" : "₦" + total.toLocaleString();
+        let depositText = (total === 0) ? "TBD after quote" : "₦" + deposit.toLocaleString();
+
         let message = "Hello *Strand Solution Enterprises*!%0A%0A" + 
-                      "*NEW ORDER*%0A" + 
+                      "*NEW ORDER DETAILS*%0A" + 
                       "--------------------------%0A" +
                       "*Client:* " + name + "%0A" +
-                      "*Service:* " + serviceName + "%0A" +
-                      "*Order Type:* " + rushData[0] + "%0A" +
-                      "*Total Amount:* ₦" + total.toLocaleString() + "%0A" +
-                      "*70% Required Deposit:* ₦" + deposit.toLocaleString() + "%0A" +
+                      "*Service:* " + serviceName + " (₦" + basePrice.toLocaleString() + ")%0A" +
+                      "*Timeline:* " + rushData[0] + " (+₦" + rushFee.toLocaleString() + ")%0A" +
+                      "*Total Amount:* " + priceText + "%0A" +
+                      "*70% Deposit Required:* " + depositText + "%0A" +
                       "*Location:* " + address + "%0A%0A" +
-                      "I have read and accepted the Business Policy, including the 2-week timeline.";
+                      "I accept the business policy and production timeline.";
 
         window.open("https://wa.me/" + myNumber + "?text=" + message);
     }
