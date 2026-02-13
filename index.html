@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strand Solution Enterprises</title>
+    <style>
+      body { background-color: #f9fafb; font-family: 'Helvetica Neue', sans-serif; padding: 20px; text-align: center; color: #333; }
+      .business-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1); max-width: 450px; margin: auto; border-top: 8px solid #be185d; }
+      h1 { color: #be185d; margin-bottom: 5px; font-size: 24px; }
+      .description { font-style: italic; color: #666; margin-bottom: 20px; font-size: 14px; line-height: 1.5; }
+      label { display: block; margin-top: 15px; font-weight: bold; text-align: left; font-size: 14px; }
+      input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; background: #fff; font-size: 16px; }
+      button { background-color: #25d366; color: white; border: none; width: 100%; padding: 16px; margin-top: 25px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="business-card">
+  <h1>Strand Solution Enterprises</h1>
+  <p class="description">
+    Professional styling of wigs, ventilation of closures, 
+    repair/revamp services, and luxury wig sales.
+  </p>
+
+  <label>Your Full Name:</label>
+  <input type="text" id="customerName" placeholder="Enter your name">
+
+  <label>Service/Product Required:</label>
+  <select id="serviceChoice">
+    <option value="Wig Styling">Professional Wig Styling - $20,000</option>
+    <option value="Closure Ventilation">Closure Ventilation - $35,000</option>
+    <option value="Wig Revamp">Repair & Revamp - $15,000</option>
+    <option value="Luxury Wig">Buy Luxury Wig - $80,000</option>
+  </select>
+
+  <label>Quantity:</label>
+  <input type="number" id="qty" value="1" min="1">
+
+  <label>Delivery Address:</label>
+  <input type="text" id="address" placeholder="Enter your location">
+
+  <button onclick="sendOrder()">Place Order via WhatsApp</button>
+</div>
+
+<script>
+  function sendOrder() {
+    // IMPORTANT: Change the number below to your real WhatsApp number
+    let phone = "2340000000000"; 
+    
+    let name = document.getElementById("customerName").value;
+    let service = document.getElementById("serviceChoice").value;
+    let qty = document.getElementById("qty").value;
+    let address = document.getElementById("address").value;
+
+    let price = 0;
+    if (service == "Wig Styling") price = 20000;
+    else if (service == "Closure Ventilation") price = 35000;
+    else if (service == "Wig Revamp") price = 15000;
+    else if (service == "Luxury Wig") price = 80000;
+
+    let total = price * qty;
+
+    if (name == "" || address == "") {
+      alert("Please fill in your name and address!");
+      return;
+    }
+
+    let msg = "Hello Strand Solution!%0A" + 
+              "Name: " + name + "%0A" +
+              "Service: " + service + "%0A" +
+              "Quantity: " + qty + "%0A" +
+              "Total: $" + total.toLocaleString() + "%0A" +
+              "Address: " + address;
+
+    window.open("https://wa.me/" + phone + "?text=" + msg);
+  }
+</script>
+
+</body>
+</html>
