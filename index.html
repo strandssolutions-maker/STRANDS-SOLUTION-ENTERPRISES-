@@ -6,24 +6,35 @@
     <style>
         body { background-color: #fafaf9; font-family: 'Segoe UI', sans-serif; padding: 15px; text-align: center; color: #1c1917; }
         .app-container { background: white; padding: 25px; border-radius: 20px; box-shadow: 0px 10px 30px rgba(0,0,0,0.08); max-width: 500px; margin: auto; border-top: 6px solid #db2777; }
-        h1 { color: #be185d; margin-bottom: 5px; font-size: 26px; }
-        .tagline { color: #701a75; font-weight: bold; margin-top: 0; font-size: 13px; margin-bottom: 20px; }
+        
+        .logo-container img { max-width: 120px; height: auto; border-radius: 50%; margin-bottom: 10px; border: 3px solid #fdf2f8; }
+        h1 { color: #be185d; margin-bottom: 5px; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .tagline { color: #701a75; font-weight: bold; margin-top: 0; font-size: 12px; margin-bottom: 20px; }
         
         .section-label { background: #fdf2f8; padding: 8px; border-radius: 5px; font-weight: bold; color: #be185d; margin-top: 20px; text-align: left; font-size: 14px; }
-        
         label { display: block; margin-top: 15px; font-weight: 600; text-align: left; font-size: 14px; color: #444; }
-        input, select { width: 100%; padding: 14px; margin-top: 6px; border: 1px solid #e7e5e4; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        input, select { width: 100%; padding: 14px; margin-top: 6px; border: 1px solid #e7e5e4; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
         
-        .note { font-size: 11px; color: #666; text-align: left; margin-top: 5px; font-style: italic; }
-        
-        button { background-color: #25d366; color: white; border: none; width: 100%; padding: 18px; margin-top: 25px; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer; }
+        .terms-link { font-size: 12px; color: #db2777; text-decoration: underline; cursor: pointer; margin-top: 15px; display: inline-block; font-weight: 600; }
+
+        /* Policy Modal */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+        .modal-content { background-color: white; margin: 10% auto; padding: 25px; border-radius: 20px; width: 85%; max-width: 450px; text-align: left; position: relative; max-height: 80vh; overflow-y: auto; }
+        .close-btn { color: #be185d; position: absolute; right: 15px; top: 10px; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .modal-content h3 { color: #be185d; border-bottom: 2px solid #fdf2f8; padding-bottom: 10px; }
+        .modal-content ul { padding-left: 20px; font-size: 14px; color: #444; line-height: 1.8; }
+
+        button { background-color: #25d366; color: white; border: none; width: 100%; padding: 18px; margin-top: 25px; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer; box-shadow: 0px 4px 10px rgba(37, 211, 102, 0.3); }
     </style>
 </head>
 <body>
 
 <div class="app-container">
+    <div class="logo-container">
+        <img src="YOUR_LOGO_FILE_NAME_HERE" onerror="this.style.display='none'">
+    </div>
     <h1>Strand Solution</h1>
-    <p class="tagline">ENTERPRISES</p>
+    <p class="tagline">Luxury Wig Services & Ventilation</p>
 
     <label>Client Full Name</label>
     <input type="text" id="custName" placeholder="Enter name">
@@ -40,63 +51,84 @@
             <option value="13x5 Ventilation|38000">13x5 Frontal - ₦38,000</option>
             <option value="13x6 Ventilation|45000">13x6 Frontal - ₦45,000</option>
         </optgroup>
-        <optgroup label="Wigging & Styling">
-            <option value="Wigging|10000">Basic Wigging - ₦10,000</option>
+        <optgroup label="Other Services">
             <option value="Wigging & Styling|20000">Wigging & Styling - ₦20,000</option>
             <option value="Machine Wigging|20000">Machine Wigging - ₦20,000</option>
-            <option value="Basic Styling|5000">Basic Styling - From ₦5,000</option>
-        </optgroup>
-        <optgroup label="Repair & Other">
             <option value="Closure Repair|2000">Closure Repair - From ₦2,000</option>
             <option value="Wig Revamp|0">Wig Revamp - Request Quote</option>
-            <option value="Lace Material|0">Lace Materials - Request Price</option>
         </optgroup>
     </select>
-    <p class="note">*Prices for ventilation may vary based on lace type.</p>
+    
+    <label>Order Type</label>
+    <select id="orderType">
+        <option value="Standard|0">Standard (2 Weeks)</option>
+        <option value="Rush Order|5000">Rush Order (+₦5,000)</option>
+    </select>
 
-    <label>Quantity</label>
-    <input type="number" id="qty" value="1" min="1">
+    <span class="terms-link" onclick="toggleModal()">📜 View Business Policy & Terms</span>
 
-    <label>Location for Delivery/Pickup</label>
-    <input type="text" id="custAddress" placeholder="Enter your address">
+    <label>Location</label>
+    <input type="text" id="custAddress" placeholder="Street, City, State">
 
     <button onclick="orderViaWhatsApp()">Place Order (WhatsApp)</button>
 </div>
 
+<div id="termsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="toggleModal()">&times;</span>
+        <h3>Business Policy</h3>
+        <ul>
+            <li><strong>70% non-refundable deposit</strong> required before production.</li>
+            <li>All prices are <strong>fixed and non-negotiable</strong>.</li>
+            <li>Production timeline is <strong>two (2) weeks</strong>.</li>
+            <li>Pressure work is <strong>not accepted</strong>.</li>
+            <li>Rush orders attract an additional <strong>₦5,000 fee</strong>.</li>
+            <li>Full balance payment required before collection.</li>
+            <li>Pick-up dates must be strictly adhered to.</li>
+        </ul>
+    </div>
+</div>
+
 <script>
+    function toggleModal() {
+        let modal = document.getElementById("termsModal");
+        modal.style.display = (modal.style.display === "block") ? "none" : "block";
+    }
+
     function orderViaWhatsApp() {
-        // Change the number below to your WhatsApp number
-        let myNumber = "+2348147040257"; 
+        let myNumber = "+2348147040257"; // USE YOUR REAL NUMBER
         
         let name = document.getElementById("custName").value;
         let serviceData = document.getElementById("serviceSelected").value.split('|');
+        let rushData = document.getElementById("orderType").value.split('|');
+        
         let serviceName = serviceData[0];
-        let pricePerUnit = parseInt(serviceData[1]);
-        let qty = document.getElementById("qty").value;
+        let basePrice = parseInt(serviceData[1]);
+        let rushFee = parseInt(rushData[1]);
         let address = document.getElementById("custAddress").value;
-
-        let total = pricePerUnit * qty;
-        let priceDisplay = (total === 0) ? "Price to be discussed" : "₦" + total.toLocaleString();
 
         if (name == "" || address == "") {
             alert("Please provide your name and address.");
             return;
         }
 
+        let total = basePrice + rushFee;
+        let deposit = total * 0.7;
+
         let message = "Hello *Strand Solution Enterprises*!%0A%0A" + 
-                      "*CLIENT ORDER*%0A" + 
+                      "*NEW ORDER*%0A" + 
                       "--------------------------%0A" +
-                      "*Name:* " + name + "%0A" +
+                      "*Client:* " + name + "%0A" +
                       "*Service:* " + serviceName + "%0A" +
-                      "*Quantity:* " + qty + "%0A" +
-                      "*Estimated Total:* " + priceDisplay + "%0A" +
+                      "*Order Type:* " + rushData[0] + "%0A" +
+                      "*Total Amount:* ₦" + total.toLocaleString() + "%0A" +
+                      "*70% Required Deposit:* ₦" + deposit.toLocaleString() + "%0A" +
                       "*Location:* " + address + "%0A%0A" +
-                      "Please confirm my order and lace type requirements.";
+                      "I have read and accepted the Business Policy, including the 2-week timeline.";
 
         window.open("https://wa.me/" + myNumber + "?text=" + message);
     }
 </script>
 
 </body>
-                                                                            </html>
-    
+</html>
